@@ -39,6 +39,7 @@ public sealed class ReplayMainScreen : State
     private ResPath _directory;
     private List<(string Name, ResPath Path)> _replays = new();
     private ResPath? _selected;
+    private static ISawmill _logger = Logger.GetSawmill(typeof(ReplayMainScreen).Name);
 
     protected override void Startup()
     {
@@ -263,7 +264,7 @@ public sealed class ReplayMainScreen : State
         }
         catch (Exception ex)
         {
-            Logger.Error($"Failed to load replay info. Exception: {ex}");
+            _logger.Error($"Failed to load replay info. Exception: {ex}");
             SelectReplay(null);
             return;
         }

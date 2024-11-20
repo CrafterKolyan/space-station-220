@@ -43,6 +43,8 @@ namespace Content.Client.ContextMenu.UI
         public Action<ContextMenuElement>? OnSubMenuOpened;
         public Action<ContextMenuElement, GUIBoundKeyEventArgs>? OnContextKeyEvent;
 
+        private static readonly ISawmill _logger = Logger.GetSawmill(nameof(ContextMenuUIController));
+
         private bool _setup;
 
         public void OnStateEntered(GameplayState state)
@@ -131,7 +133,7 @@ namespace Content.Client.ContextMenu.UI
         {
             if (!Menus.TryPeek(out var topMenu))
             {
-                Logger.Error("Context Menu: Mouse entered menu without any open menus?");
+                _logger.Error("Context Menu: Mouse entered menu without any open menus?");
                 return;
             }
 
@@ -181,7 +183,7 @@ namespace Content.Client.ContextMenu.UI
         {
             if (!Menus.TryPeek(out var topMenu))
             {
-                Logger.Error("Context Menu: Attempting to open sub menu without any open menus?");
+                _logger.Error("Context Menu: Attempting to open sub menu without any open menus?");
                 return;
             }
 

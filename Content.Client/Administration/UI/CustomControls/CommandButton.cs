@@ -11,6 +11,8 @@ namespace Content.Client.Administration.UI.CustomControls
     {
         public string? Command { get; set; }
 
+        private static ISawmill _logger = Logger.GetSawmill(nameof(CommandButton));
+
         public CommandButton()
         {
             OnPressed += Execute;
@@ -41,7 +43,7 @@ namespace Content.Client.Administration.UI.CustomControls
         {
             if (args.Count != 2 || !args.TryGetValue("Text", out var text) || !args.TryGetValue("Command", out var command))
             {
-                Logger.Error($"Invalid arguments passed to {nameof(CommandButton)}");
+                _logger.Error($"Invalid arguments passed to {nameof(CommandButton)}");
                 control = null;
                 return false;
             }
